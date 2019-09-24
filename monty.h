@@ -29,4 +29,9 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+stack_t *push(stack_t **head, const int n);
+size_t pall(const stack_t *h);
+stack_t *pop_at_index(stack_t **head, unsigned int idx);
+void free_stackt(stack_t *head);
 #endif
