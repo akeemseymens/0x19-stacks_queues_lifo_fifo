@@ -4,7 +4,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-global_t global = { 0, NULL, NULL };
+global_t global = { 0, NULL, NULL, NULL };
 
 /**
  * bye - destructor
@@ -12,26 +12,21 @@ global_t global = { 0, NULL, NULL };
 void bye(void) __attribute__((destructor));
 void bye(void)
 {
-	free_stackt(&global.stack);
-	free(global.line);
-	fclose(global.file);
+	if (global.stack)
+		free_stackt(&global.stack);
+	if (global.line)
+		free(global.line);
+	if (global.file)
+		fclose(global.file);
 }
 
 /**
- * main - entry point for program
- * @argc: number of arguments provided to the program (should be 2)
- * @argv: arguments provided to the program
- *
- * Return: EXIT_SUCCESS
+ * init - validate inputs and open file
+ * @argc: number of arguments
+ * @argv: arguments
  */
-int main(int argc, char *argv[])
+void init(int argc, char *argv[])
 {
-	ssize_t bytes_read;
-	char *command;
-	size_t line_size = 0, i;
-	unsigned int ln = 0;
-	void (*command_func)(stack_t **, unsigned int);
-
 	if (argc != 2)
 	{
 		perror("USAGE: monty file");
@@ -44,14 +39,29 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
+}
 
+/**
+ * main - entry point for program
+ * @argc: number of arguments provided to the program (should be 2)
+ * @argv: arguments provided to the program
+ *
+ * Return: EXIT_SUCCESS
+ */
+int main(int argc, char *argv[])
+{
+	char *command;
+	size_t line_size = 0;
+	unsigned int ln = 0;
+	void (*command_func)(stack_t **, unsigned int);
+
+	init(argc, argv);
 	while (1)
 	{
 		ln++;
 		global.line = NULL;
 		line_size = 0;
-		bytes_read = getline(&global.line, &line_size, global.file);
-		if (bytes_read == -1)
+		if (getline(&global.line, &line_size, global.file) == -1)
 			break;
 
 		command = strtok(global.line, " ");
@@ -60,15 +70,9 @@ int main(int argc, char *argv[])
 			free(global.line);
 			continue;
 		}
-
 		if (strcmp(command, "push") == 0)
-		{
-			global.value = strtok(NULL, " ");
-			global.value = strtok(global.value, "\n");
-			global.value = strtok(global.value, "\t");
-		}
-		command = strtok(command, "\n");
-		command = strtok(command, "\t");
+			global.value = strtok(strtok(strtok(NULL, " "), "\n"), "\t");
+		command = strtok(strtok(command, "\n"), "\t");
 
 		command_func = get_command(command);
 		if (!command_func)
@@ -76,7 +80,6 @@ int main(int argc, char *argv[])
 			dprintf(STDERR_FILENO, "L%ud: unknown instruction %s", ln, command);
 			exit(EXIT_FAILURE);
 		}
-
 		command_func(&global.stack, ln);
 
 		free(global.line);
