@@ -1,4 +1,4 @@
-#include "lists.h"
+#include "monty.h"
 
 /**
  * pop - deletes the first nodes
@@ -10,10 +10,10 @@
 void pop(stack_t **head, unsigned int line_number)
 {
 
-	stack_t *p;             ;
+	stack_t *p;
 
 	if (!head || !*head)
-		dprintf("L %ud: can't pop an empty stack.", line_number)
+		dprintf(STDERR_FILENO, "L%ud: can't pop an empty stack.", line_number);
 
 	p = *head;
 	while (p && p->prev)

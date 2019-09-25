@@ -1,5 +1,10 @@
-#ifndefine _MONTY_H
-#defint _MONTY_H
+#ifndef _MONTY_H
+#define _MONTY_H
+
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -12,9 +17,9 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 /**
  * struct instruction_s - opcode and its function
@@ -26,19 +31,28 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-typedef struct global_s {
-
-	int value;
-
+/**
+ * struct global_s - globals needed by the program
+ * @value: value used in push
+ * @stack: head node of the stack
+ * @line: line read from file
+ * @file: file to read lines from
+ */
+typedef struct global_s
+{
+	char *value;
+	stack_t *stack;
+	char *line;
+	FILE *file;
 } global_t;
 
-extern global_t global = { 0 };
-stack_t push(stack_t **head, unsigned int n);
-void pall(stack_t **h, unsigned int line_number)
+extern global_t global;
+void push(stack_t **head, unsigned int n);
+void pall(stack_t **h, unsigned int line_number);
 stack_t *pop_at_index(stack_t **head, unsigned int idx);
 void free_stackt(stack_t **head);
 void (*get_command(char *op))(stack_t **, unsigned int);
