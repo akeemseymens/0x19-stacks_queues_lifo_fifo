@@ -1,42 +1,27 @@
 #include "lists.h"
 
 /**
- * pop_at_index - inset a new node at a given position
+ * pop - deletes the first nodes
  * @head: a node in a dlistint list
- * @idx: index in dlistint list at which to insert new node
+ * @line_number: line number passed file.
  *
- * Return: 1 (SUCCESS) of deletion, else -1
  */
 
-stack_t *pop_at_index(stack_t **head, unsigned int idx)
+void pop(stack_t **head, unsigned int line_number)
 {
 
-	stack_t *p, *last = NULL;
-	unsigned int i = idx;
+	stack_t *p;             ;
 
-	if (!head)
-		return (-1);
+	if (!head || !*head)
+		dprintf("L %ud: can't pop an empty stack.", line_number)
 
 	p = *head;
 	while (p && p->prev)
 		p = p->prev;
 
-	while (p && idx)
-	{
-		last = p;
-		p = p->next;
-		idx--;
-	}
-
-	if (idx != 0 || !p)
-		return (-1);
-
-	if (last)
-		last->next = p->next;
 	if (p->next)
-		p->next->prev = last;
+		p->next->prev = NULL;
 
-	if (i == 0)
-		*head = p->next;
-	return (p);
+	*head = p->next;
+	free(p);
 }

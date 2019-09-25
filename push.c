@@ -8,14 +8,18 @@
  * Return: The address of the new node, or NULL if new node failed.
  */
 
-stack_t *push(stack_t **head, const int n)
+stack_t push(stack_t **head, unsigned int n)
 {
 	stack_t *new;
+	unsigned int i;
 
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 		return (NULL);
-	new->n = n;
+	for (i = 0; global.n[i] != '\0'; i++)
+		if (!isdigit(global.n))
+			dprintf(FILENO_STDERR, "L %ud usage: push integer", n);
+	new->n = atoi(global.n);
 	new->next = *head;
 	new->prev = NULL;
 	if (*head)

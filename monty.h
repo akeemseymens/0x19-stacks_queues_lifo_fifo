@@ -30,8 +30,16 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-stack_t *push(stack_t **head, const int n);
-size_t pall(const stack_t *h);
+typedef struct global_s {
+
+	int value;
+
+} global_t;
+
+extern global_t global = { 0 };
+stack_t push(stack_t **head, unsigned int n);
+void pall(stack_t **h, unsigned int line_number)
 stack_t *pop_at_index(stack_t **head, unsigned int idx);
-void free_stackt(stack_t *head);
+void free_stackt(stack_t **head);
+void (*get_command(char *op))(stack_t **, unsigned int);
 #endif

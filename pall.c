@@ -1,19 +1,18 @@
 #include "lists.h"
 /**
- * print_dlistint - Prints all the elements of the list.
+ * pall - Prints all the elements of the list.
  * @h: header and list.
- * Return: the count.
+ *
  **/
-size_t pall(const stack_t *h)
+void pall(stack_t **h, unsigned int line_number)
 {
-	size_t count = 0;
+	stack_t *p = *h;
+	(void) unsigned int line_number;
 
-	while (h)
+	while (p)
 	{
-		printf("%d\n", h->n);
-		count++;
-		h = h->next;
+		printf("%d\n", p->n);
+       		p = p->next;
 	}
 
-	return (count);
 }

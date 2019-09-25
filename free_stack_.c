@@ -5,9 +5,9 @@
  * @head: The head of the list
  */
 
-void free_stackt(stack_t *head)
+void free_stackt(stack_t **head)
 {
-	stack_t *tmp;
+	stack_t **tmp;
 
 	while (head)
 	{
