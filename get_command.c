@@ -18,7 +18,7 @@ void (*get_command(char *op))(stack_t **, unsigned int)
 		{"nop", nop},
 		{"sub", NULL},
 		{"div", NULL},
-		{"mul", NULL},
+		{"mul", mul},
 		{"mod", NULL},
 		{"pchar", NULL},
 		{"pstr", NULL},
