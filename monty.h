@@ -65,7 +65,7 @@ void queue(stack_t **head, unsigned int line_number);
 void pint(stack_t **head, unsigned int line_number);
 void add(stack_t **head, unsigned int line_number);
 void swap(stack_t **head, unsigned int line_number);
-
+void mul(stack_t **head, unsigned int line_number);
 void free_stackt(stack_t **head);
 void (*get_command(char *op))(stack_t **, unsigned int);
 stack_t *reverse(stack_t **head);
