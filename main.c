@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
 			free(global.line);
 			continue;
 		}
-		if (strcmp(command, "push") == 0)
+		if (strncmp(command, "push", 4) == 0)
 			global.value = strtok(strtok(NULL, " "), "\n");
 
 		command = strtok(command, "\n");

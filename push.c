@@ -21,7 +21,7 @@ void push(stack_t **head, unsigned int n)
 	}
 
 	i = 0;
-	if (global.value[0] == '\0')
+	if (!global.value || global.value[0] == '\0')
 	{
 		dprintf(STDERR_FILENO, "L%u usage: push integer\n", n);
 		free(new);
