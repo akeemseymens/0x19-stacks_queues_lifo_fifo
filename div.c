@@ -2,7 +2,7 @@
 
 /**
  * div - Divide the second element of the stack by the top element
- * @head: The stack
+ * @head: The head of the stack
  * @line_number: The line number
  */
 void div(stack_t **head, unsigned int line_number)
