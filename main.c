@@ -52,7 +52,7 @@ void init(int argc, char *argv[])
 int main(int argc, char *argv[])
 {
 	char *command;
-	size_t line_size = 0;
+	size_t line_size = 0, i;
 	unsigned int ln = 0;
 	void (*command_func)(stack_t **, unsigned int);
 
@@ -65,6 +65,9 @@ int main(int argc, char *argv[])
 		if (getline(&global.line, &line_size, global.file) == -1)
 			break;
 
+		for (i = 0; global.line[i]; i++)
+			if (global.line[i] == '\t')
+				global.line[i] = ' ';
 		command = strtok(global.line, " ");
 		if (!command)
 		{
@@ -72,8 +75,9 @@ int main(int argc, char *argv[])
 			continue;
 		}
 		if (strcmp(command, "push") == 0)
-			global.value = strtok(strtok(strtok(NULL, " "), "\n"), "\t");
-		command = strtok(strtok(command, "\n"), "\t");
+			global.value = strtok(strtok(NULL, " "), "\n");
+
+		command = strtok(command, "\n");
 		if (!command)
 		{
 			free(global.line);
