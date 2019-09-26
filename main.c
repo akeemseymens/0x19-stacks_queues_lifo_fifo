@@ -74,11 +74,16 @@ int main(int argc, char *argv[])
 		if (strcmp(command, "push") == 0)
 			global.value = strtok(strtok(strtok(NULL, " "), "\n"), "\t");
 		command = strtok(strtok(command, "\n"), "\t");
+		if (!command)
+		{
+			free(global.line);
+			continue;
+		}
 
 		command_func = get_command(command);
 		if (!command_func)
 		{
-			dprintf(STDERR_FILENO, "L%u: unknown instruction %s", ln, command);
+			dprintf(STDERR_FILENO, "L%u: unknown instruction %s\n", ln, command);
 			exit(EXIT_FAILURE);
 		}
 		command_func(&global.stack, ln);

@@ -30,6 +30,9 @@ void (*get_command(char *op))(stack_t **, unsigned int)
 	};
 	size_t i = 0;
 
+	if (!op)
+		return (NULL);
+
 	for (i = 0; instructions[i].opcode; i++)
 		if (strcmp(instructions[i].opcode, op) == 0)
 			return (instructions[i].f);
