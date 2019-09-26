@@ -59,6 +59,8 @@ void pop(stack_t **head, unsigned int line_number);
 void nop(stack_t **head, unsigned int line_number);
 void rotl(stack_t **head, unsigned int line_number);
 void rotr(stack_t **head, unsigned int line_number);
+void stack(stack_t **head, unsigned int line_number);
+void queue(stack_t **head, unsigned int line_number);
 
 void free_stackt(stack_t **head);
 void (*get_command(char *op))(stack_t **, unsigned int);
