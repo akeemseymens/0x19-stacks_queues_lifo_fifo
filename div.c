@@ -1,11 +1,11 @@
 #include "monty.h"
 
 /**
- * div - Divide the second element of the stack by the top element
+ * _div - Divide the second element of the stack by the top element
  * @head: The head of the stack
  * @line_number: The line number
  */
-void div(stack_t **head, unsigned int line_number)
+void _div(stack_t **head, unsigned int line_number)
 {
 	stack_t *p;
 
