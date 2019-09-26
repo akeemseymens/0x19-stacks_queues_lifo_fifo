@@ -48,12 +48,19 @@ typedef struct global_s
 	stack_t *stack;
 	char *line;
 	FILE *file;
+	int stack_mode;
 } global_t;
 
 extern global_t global;
-void push(stack_t **head, unsigned int n);
-void pall(stack_t **h, unsigned int line_number);
-stack_t *pop_at_index(stack_t **head, unsigned int idx);
+
+void push(stack_t **head, unsigned int line_number);
+void pall(stack_t **head, unsigned int line_number);
+void pop(stack_t **head, unsigned int line_number);
+void nop(stack_t **head, unsigned int line_number);
+void rotl(stack_t **head, unsigned int line_number);
+void rotr(stack_t **head, unsigned int line_number);
+
 void free_stackt(stack_t **head);
 void (*get_command(char *op))(stack_t **, unsigned int);
+
 #endif
