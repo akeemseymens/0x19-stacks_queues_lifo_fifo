@@ -13,18 +13,10 @@ void push(stack_t **head, unsigned int n)
 	stack_t *new;
 	unsigned int i;
 
-	new = malloc(sizeof(stack_t));
-	if (new == NULL)
-	{
-		dprintf(STDERR_FILENO, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-
 	i = 0;
 	if (!global.value || global.value[0] == '\0')
 	{
 		dprintf(STDERR_FILENO, "L%u usage: push integer\n", n);
-		free(new);
 		exit(EXIT_FAILURE);
 	}
 	else if (global.value[0] == '-' && global.value[1] != '\0')
@@ -33,9 +25,15 @@ void push(stack_t **head, unsigned int n)
 		if (!isdigit(global.value[i]))
 		{
 			dprintf(STDERR_FILENO, "L%u usage: push integer\n", n);
-			free(new);
 			exit(EXIT_FAILURE);
 		}
+
+	new = malloc(sizeof(stack_t));
+	if (new == NULL)
+	{
+		dprintf(STDERR_FILENO, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 	new->n = atoi(global.value);
 	new->next = *head;
 	new->prev = NULL;
