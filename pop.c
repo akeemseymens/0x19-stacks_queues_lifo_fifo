@@ -16,12 +16,26 @@ void pop(stack_t **head, unsigned int line_number)
 		dprintf(STDERR_FILENO, "L%ud: can't pop an empty stack.", line_number);
 
 	p = *head;
-	while (p && p->prev)
-		p = p->prev;
+	if (global.stack_mode)
+	{
+		while (p && p->prev)
+			p = p->prev;
 
-	if (p->next)
-		p->next->prev = NULL;
+		if (p->next)
+			p->next->prev = NULL;
 
-	*head = p->next;
+		*head = p->next;
+	}
+	else
+	{
+		while (p && p->next)
+			p = p->next;
+
+		if (p->prev)
+			p->prev->next = NULL;
+		else
+			*head = NULL;
+	}
+
 	free(p);
 }
