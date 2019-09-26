@@ -2,7 +2,7 @@
 
 /**
  * mul - Multiply the second element of the stack by the top element
- * @stack: The stack
+ * @head: The head node in stack
  * @line_number: The line number
  */
 void mul(stack_t **head, unsigned int line_number)
