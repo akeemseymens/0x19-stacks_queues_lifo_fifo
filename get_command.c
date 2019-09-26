@@ -11,10 +11,10 @@ void (*get_command(char *op))(stack_t **, unsigned int)
 	instruction_t instructions[] = {
 		{"push", push},
 		{"pall", pall},
-		{"pint", NULL},
+		{"pint", pint},
 		{"pop", pop},
-		{"swap", NULL},
-		{"add", NULL},
+		{"swap", swap},
+		{"add", add},
 		{"nop", nop},
 		{"sub", NULL},
 		{"div", NULL},
