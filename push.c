@@ -23,8 +23,7 @@ void push(stack_t **head, unsigned int n)
 	for (i = 0; global.value[i] != '\0'; i++)
 		if (!isdigit(global.value[i]))
 		{
-			printf(">%s<\n", global.value);
-			dprintf(STDERR_FILENO, "L%ud usage: push integer\n", n);
+			dprintf(STDERR_FILENO, "L%u usage: push integer\n", n);
 			exit(EXIT_FAILURE);
 		}
 	new->n = atoi(global.value);

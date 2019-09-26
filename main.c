@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
 		command_func = get_command(command);
 		if (!command_func)
 		{
-			dprintf(STDERR_FILENO, "L%ud: unknown instruction %s", ln, command);
+			dprintf(STDERR_FILENO, "L%u: unknown instruction %s", ln, command);
 			exit(EXIT_FAILURE);
 		}
 		command_func(&global.stack, ln);
