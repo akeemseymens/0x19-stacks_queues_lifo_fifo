@@ -10,7 +10,7 @@
 void hi(void) __attribute__((constructor));
 void hi(void)
 {
-	global_t global = { 0, NULL, NULL, NULL };
+	global_t global = { 0, NULL, NULL, NULL, 1 };
 }
 
 /**
