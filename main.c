@@ -4,14 +4,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-/**
- * hi - constructor
- */
-void hi(void) __attribute__((constructor));
-void hi(void)
-{
-	global_t global = { 0, NULL, NULL, NULL, 1 };
-}
+
+global_t global = { 0, NULL, NULL, NULL, 1 };
 
 /**
  * bye - destructor
