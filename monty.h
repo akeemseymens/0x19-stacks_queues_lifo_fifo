@@ -41,6 +41,7 @@ typedef struct instruction_s
  * @stack: head node of the stack
  * @line: line read from file
  * @file: file to read lines from
+ * @stack_mode: is the structure a stack or a queue
  */
 typedef struct global_s
 {
@@ -67,5 +68,6 @@ void swap(stack_t **head, unsigned int line_number);
 
 void free_stackt(stack_t **head);
 void (*get_command(char *op))(stack_t **, unsigned int);
+stack_t *reverse(stack_t **head);
 
 #endif

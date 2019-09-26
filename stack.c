@@ -12,5 +12,8 @@ void stack(stack_t **head, unsigned int line_number)
 	(void) head;
 	(void) line_number;
 
+	if (!global.stack_mode)
+		reverse(head);
+
 	global.stack_mode = 1;
 }

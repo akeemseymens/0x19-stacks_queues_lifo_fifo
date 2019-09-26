@@ -10,10 +10,22 @@ void pall(stack_t **h, unsigned int line_number)
 
 	(void) line_number;
 
-	while (p)
+	if (global.stack_mode)
 	{
-		printf("%d\n", p->n);
-		p = p->next;
+		while (p)
+		{
+			printf("%d\n", p->n);
+			p = p->next;
+		}
 	}
-
+	else
+	{
+		while (p && p->next)
+			p = p->next;
+		while (p)
+		{
+			printf("%d\n", p->n);
+			p = p->prev;
+		}
+	}
 }

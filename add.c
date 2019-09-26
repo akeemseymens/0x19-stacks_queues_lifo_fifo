@@ -19,10 +19,20 @@ void add(stack_t **head, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	p = p->next;
-	p->n += p->prev->n;
-	free(p->prev);
-	p->prev = NULL;
-
-	*head = p;
+	if (global.stack_mode)
+	{
+		p = p->next;
+		p->n += p->prev->n;
+		free(p->prev);
+		p->prev = NULL;
+		*head = p;
+	}
+	else
+	{
+		while (p && p->next)
+			p = p->next;
+		p->prev->n += p->n;
+		p->prev->next = NULL;
+		free(p);
+	}
 }
