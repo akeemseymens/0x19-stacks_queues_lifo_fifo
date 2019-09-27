@@ -65,6 +65,7 @@ int main(int argc, char *argv[])
 		if (getline(&global.line, &line_size, global.file) == -1)
 			break;
 
+		global.line = strtok(global.line, "#");
 		command = strtok(global.line, " \t\n");
 		if (!command)
 		{
